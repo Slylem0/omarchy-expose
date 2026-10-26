@@ -148,7 +148,7 @@ Ui.BorderSurface {
                     anchors.fill: parent
                     z: 2
                     active: card.overlayFooter
-                    sourceComponent: overlayFooter
+                    sourceComponent: overlayFooterComponent
                 }
 
                 layer.effect: MultiEffect {
@@ -189,7 +189,7 @@ Ui.BorderSurface {
 
             Loader {
                 anchors.fill: parent
-                sourceComponent: card.floatingFooter ? floatingFooter : (card.integratedFooter ? integratedFooter : (card.centeredFooter ? centeredFooter : null))
+                sourceComponent: card.floatingFooter ? floatingFooterComponent : (card.integratedFooter ? integratedFooterComponent : (card.centeredFooter ? centeredFooterComponent : null))
             }
 
         }
@@ -240,7 +240,7 @@ Ui.BorderSurface {
 
     // Only the configured footer style is instantiated per card.
     Component {
-        id: overlayFooter
+        id: overlayFooterComponent
 
         Item {
             Rectangle {
@@ -294,7 +294,7 @@ Ui.BorderSurface {
     }
 
     Component {
-        id: floatingFooter
+        id: floatingFooterComponent
 
         RowLayout {
             spacing: Style.spacing.md
@@ -321,7 +321,7 @@ Ui.BorderSurface {
     }
 
     Component {
-        id: integratedFooter
+        id: integratedFooterComponent
 
         RowLayout {
             spacing: Style.spacing.md
@@ -341,7 +341,7 @@ Ui.BorderSurface {
     }
 
     Component {
-        id: centeredFooter
+        id: centeredFooterComponent
 
         ColumnLayout {
             spacing: 0

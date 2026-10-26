@@ -181,6 +181,7 @@ ShellRoot {
                 require(Border.isNone(hover.borderSpec) && Border.isNone(focus.borderSpec) && Border.isNone(selected.borderSpec), "zero state widths");
                 require(card.outlineSpec.widths.left === 2, "idle window keeps compositor width");
                 require(Math.abs(Qt.color(card.outlineSpec.color).a - 170 / 255) < 0.01, "inactive compositor alpha");
+                require(card.color.a === 0 && Border.isNone(card.borderSpec), "floating footer leaves the card surface transparent");
                 card.hovered = true;
                 require(card.outlineSpec.widths.left === 2 && card.outlineSpec.gradient.enabled, "hover uses active compositor gradient without doubling width");
                 require(card.outlineSpec.gradient.angle === 45 && Qt.color(card.outlineSpec.gradient.colors[0]).r === Qt.color("#4a9a68").r, "ARGB conversion and angle");
