@@ -16,8 +16,8 @@ Item {
 
     property var shell: null
     property var manifest: null
-    readonly property alias windowBorders: windowBorders
-    WindowBorders { id: windowBorders }
+    readonly property alias windowBorders: compositorBorders
+    WindowBorders { id: compositorBorders }
     readonly property string pluginId: String((root.manifest && root.manifest.id) || "expose.window-overview")
     readonly property string pluginDir: String((root.manifest && root.manifest.__sourceDir)
         || (Quickshell.env("HOME") + "/.config/omarchy/plugins/" + root.pluginId))
@@ -294,7 +294,7 @@ Item {
     }
 
     function open(payload) {
-        windowBorders.refresh();
+        compositorBorders.refresh();
         var blurRestoreInFlight = root.backgroundBlurReleasePhase === 1 && backgroundBlurSession.running;
         if (!blurRestoreInFlight)
             root.backgroundBlurReleasePhase = 0;
@@ -1614,7 +1614,7 @@ Item {
         }
         function onRawEvent(event) {
             if (event && event.name === "configreloaded")
-                windowBorders.refresh();
+                compositorBorders.refresh();
             if (event && event.name === "custom" && event.data === "expose.window-overview:toggle")
                 root.toggle();
         }
