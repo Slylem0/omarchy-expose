@@ -5,6 +5,7 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 import "WindowModel.js" as WindowModel
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui as Ui
 
 Ui.BorderSurface {
@@ -35,7 +36,7 @@ Ui.BorderSurface {
     readonly property string iconSource: card.controller.iconFor(modelData)
     readonly property var outlineSpec: hovered || selected || focusedWindow
         ? controller.windowBorders.activeSpec : controller.windowBorders.inactiveSpec
-    readonly property color currentColor: Style.selectedStateColor(Color.menu.text, Color.accent)
+    readonly property color currentColor: Style.selectedStateColor(Commons.Color.menu.text, Commons.Color.accent)
     // An excluded card keeps its last rectangle, so it neither
     // animates toward the origin nor flies back in from it.
     readonly property var packedRectSource: inLayout ? card.windowLayout[slot] : null
@@ -60,7 +61,7 @@ Ui.BorderSurface {
     height: layoutRect.height
     z: previewed ? 11 : (exitingPreview ? 10 : 0)
     radius: integratedFooter ? Style.cornerRadius : 0
-    color: integratedFooter ? Color.menu.background : "transparent"
+    color: integratedFooter ? Commons.Color.menu.background : "transparent"
     borderSpec: integratedFooter ? outlineSpec : Border.none()
     opacity: card.controller.previewIndex < 0 || previewed ? 1 : 0.28
 
@@ -116,7 +117,7 @@ Ui.BorderSurface {
                 width: Math.min(parent.width, parent.height * windowAspectRatio)
                 height: Math.min(parent.height, parent.width / windowAspectRatio)
                 radius: Math.max(0, Style.cornerRadius - Style.spacing.xs)
-                color: Color.background
+                color: Commons.Color.background
                 clip: true
                 layer.enabled: true
 
@@ -198,7 +199,7 @@ Ui.BorderSurface {
     // Shared footer building blocks; each footer style overrides only what differs.
     component CardText: Text {
         textFormat: Text.PlainText
-        color: Color.menu.text
+        color: Commons.Color.menu.text
         font.family: Style.font.menuFamily
         font.pixelSize: Style.font.body
     }
@@ -224,7 +225,7 @@ Ui.BorderSurface {
         CardText {
             Layout.alignment: Qt.AlignRight
             text: card.workspaceName
-            color: card.focusedWindow ? card.currentColor : Color.menu.text
+            color: card.focusedWindow ? card.currentColor : Commons.Color.menu.text
             font.pixelSize: Style.font.heading
             font.bold: true
         }
@@ -258,7 +259,7 @@ Ui.BorderSurface {
 
                     GradientStop {
                         position: 1
-                        color: Color.menu.background
+                        color: Commons.Color.menu.background
                     }
                 }
             }
@@ -331,7 +332,7 @@ Ui.BorderSurface {
 
             CardText {
                 text: "WS " + card.workspaceName
-                color: card.focusedWindow ? card.currentColor : Color.menu.text
+                color: card.focusedWindow ? card.currentColor : Commons.Color.menu.text
                 opacity: card.focusedWindow ? 1 : 0.68
                 font.pixelSize: Style.font.caption
                 font.bold: true
@@ -358,7 +359,7 @@ Ui.BorderSurface {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.maximumWidth: Math.max(1, card.width - Style.space(32))
                 text: card.applicationName + "  ·  Workspace " + card.workspaceName
-                color: card.focusedWindow ? card.currentColor : Color.menu.text
+                color: card.focusedWindow ? card.currentColor : Commons.Color.menu.text
                 opacity: card.focusedWindow ? 1 : 0.62
                 font.pixelSize: Style.font.caption
                 elide: Text.ElideRight
